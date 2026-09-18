@@ -245,29 +245,9 @@ class WeatherService {
 
 > ✅ **Checkpoint 2.2** บันทึกผลการตรวจสอบ `statusCode` อย่างน้อย 2 กรณี (สำเร็จ และ 404) ตามเกณฑ์ข้างต้น
 
-```text
-      if (response.statusCode == 200) {
-        // กรณีสำเร็จ แปลงข้อมูลด้วย Weather.fromJson
-        return Weather.fromJson(jsonDecode(response.body));
-      } else if (response.statusCode == 404) {
-        // ดักจับกรณี 404 ไม่พบเมืองที่ค้นหา
-        throw Exception('ไม่มีเมืองที่ค้นหา กรุณาตรวจสอบชื่อเมืองอีกครั้ง');
-      }
+<img width="957" height="190" alt="image" src="https://github.com/user-attachments/assets/45121346-c5f1-41b7-b63c-84b7760fe601" />
 
-      // กรณี Error อื่นๆ
-      throw Exception('เกิดข้อผิดพลาดจากเซิร์ฟเวอร์ (${response.statusCode})');
-    } on TimeoutException {
-      throw Exception('การเชื่อมต่อหมดเวลา กรุณาลองใหม่อีกครั้ง');
-    } on http.ClientException {
-      throw Exception(
-        'ไม่สามารถเชื่อมต่ออินเทอร์เน็ตได้ กรุณาตรวจสอบการเชื่อมต่อ',
-      );
-    } on FormatException {
-      // ดักจับกรณี JSON ผิดรูปแบบ
-      throw Exception('ข้อมูลที่ได้รับจากเซิร์ฟเวอร์ผิดรูปแบบ');
-    } catch (e) {
-      rethrow;
-```
+<img width="708" height="107" alt="image" src="https://github.com/user-attachments/assets/32f353f1-4d6c-4480-a6ca-0a89b698b4cc" />
 
 
 ### ขั้นตอนที่ 2.4 — 🧠 คิดเอง/ออกแบบเอง
@@ -450,6 +430,11 @@ ElevatedButton(
 บันทึกรูปและคำตอบที่นี่
 ```
 
+<img width="526" height="215" alt="image" src="https://github.com/user-attachments/assets/fb3630c5-8f4c-4471-a01f-f1f30eacdb70" />
+
+
+
+
 ### ขั้นตอนที่ 3.2 — 🧠 คิดเอง/ออกแบบเอง
 
 เขียนฟังก์ชัน `updateDemoPost()` เพิ่มเติมด้วยตัวเอง โดยใช้ `createDemoPost()` ในขั้นตอนที่ 3.1 เป็นต้นแบบโครงสร้าง แต่เปลี่ยนให้เรียก HTTP Method **PUT** ไปยัง `https://jsonplaceholder.typicode.com/posts/1` พร้อม body ที่คุณกำหนดเนื้อหาให้มีชื่อนักศึกษา  โครงเริ่มต้นด้านล่างให้เฉพาะชื่อฟังก์ชันและ `Uri` เป็นตัวอย่าง ส่วนการเรียก `http.put()` พร้อม body และการ print ผลลัพธ์ให้เขียนต่อเอง
@@ -476,6 +461,8 @@ Future<void> updateDemoPost() async {
 ```text
 บันทึกรูปและคำตอบที่นี่
 ```
+<img width="703" height="181" alt="image" src="https://github.com/user-attachments/assets/66d88947-130a-4f60-9a77-e1f86fb5822a" />
+
 ---
 
 ## ส่วนที่ 4: ใช้ AI ช่วย Generate โค้ด API Client
