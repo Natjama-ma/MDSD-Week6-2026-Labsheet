@@ -518,6 +518,7 @@ GET https://fakestoreapi.com/products
 ```text
 บันทึกรูปที่นี่
 ```
+<img width="607" height="402" alt="image" src="https://github.com/user-attachments/assets/6cc6a605-e89e-47a6-acb4-085f55b94be7" />
 
 ---
 
@@ -602,11 +603,24 @@ Future<Weather> fetchWeatherWithDio(String city) async {
 ```text
 บันทึกคำตอบที่นี่
 ```
+<img width="742" height="207" alt="image" src="https://github.com/user-attachments/assets/7cf1f679-5de6-45b0-bb84-3775d58b7e9d" />
+
+
 >
 > ✅ **Checkpoint 5.3** แสดงโค้ดเงื่อนไข `DioExceptionType` เพิ่มเติมที่เขียนเองในขั้นตอนที่ 5.4 
 
 ```text
-บันทึกคำตอบที่นี่
+if (e.type == DioExceptionType.connectionTimeout) {
+      throw Exception('การเชื่อมต่อหมดเวลา กรุณาลองใหม่อีกครั้ง');
+    } else if (e.type == DioExceptionType.badResponse) {
+      throw Exception('เซิร์ฟเวอร์ตอบกลับผิดพลาด (${e.response?.statusCode})');
+    } else if (e.type == DioExceptionType.receiveTimeout) {
+      throw Exception( 'เซิร์ฟเวอร์ใช้เวลาตอบกลับนานเกินไป กรุณาลองใหม่อีกครั้ง',
+      );
+    } else if (e.type == DioExceptionType.connectionError) {
+      throw Exception( 'ไม่สามารถเชื่อมต่อเครือข่ายได้ กรุณาตรวจสอบอินเทอร์เน็ตของคุณ',
+      );
+    }
 ```
 ---
 
@@ -732,6 +746,10 @@ void main() {
 ```text
 บันทึกรูปที่นี่
 ```
+
+<img width="735" height="172" alt="image" src="https://github.com/user-attachments/assets/60fc898d-212d-4449-a003-0e8679ad9861" />
+
+
 ### ขั้นตอนที่ 7.3 — 🔧 ทำตาม (Interface) + 🧠 คิดเอง (Implementation)
 
 ในสัปดาห์ก่อนหน้า มีการเรียนหลักการ **Repository Pattern** ไปแล้วว่า Widget/ViewModel ไม่ควรรู้จักแหล่งข้อมูลโดยตรง (เช่น เรียก `http.get()` เองในไฟล์ UI) แต่ควรรู้จักผ่าน **Interface** เท่านั้น เพื่อให้สลับแหล่งข้อมูลได้โดยไม่ต้องแก้ Widget สัปดาห์นี้ Campus Marketplace มีแหล่งข้อมูลจริงให้ดึง (REST API) ซึ่งจะนำทฤษฎีเรื่อง Repository Pattern มาใช้งานจริง
@@ -869,6 +887,13 @@ class _HomePageState extends State<HomePage> {
 ```text
 บันทึกรูปที่นี่
 ```
+
+<img width="1907" height="911" alt="image" src="https://github.com/user-attachments/assets/beaf0db2-dcb2-4cb2-919a-cad5442fc643" />
+
+<img width="1902" height="901" alt="image" src="https://github.com/user-attachments/assets/03a3e208-de46-4784-a204-c7365d11e6a9" />
+
+<img width="1912" height="907" alt="image" src="https://github.com/user-attachments/assets/827b6142-2bf8-45af-9c7c-477305b604e7" />
+
 
 ---
 
