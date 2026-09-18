@@ -80,6 +80,10 @@ https://api.openweathermap.org/data/2.5/weather?q=Bangkok&appid=YOUR_API_KEY&uni
 ```text
 บันทึกรูปและคำตอบที่นี่
 ```
+<img width="1573" height="611" alt="Screenshot 2026-09-18 091720" src="https://github.com/user-attachments/assets/ba609a43-3d09-4b73-beb1-a99d0f05d18f" />
+
+
+
 ### ขั้นตอนที่ 1.2 — 🧠 คิดเอง/ออกแบบเอง
 
 ออกแบบการทดสอบกรณีผิดพลาด (error case) อย่างน้อย 1 กรณี โดยเปลี่ยนค่าพารามิเตอร์บางตัวใน Request ให้เป็นสิ่งที่คาดว่าจะทำให้เซิร์ฟเวอร์ตอบกลับด้วย error (ตัวอย่างแนวทางที่เลือกได้ เช่น เปลี่ยนชื่อเมืองเป็นชื่อที่ไม่มีอยู่จริง, ใส่ `appid` ผิด, หรือลบ `appid` ออกไปเลย) **ก่อนกด Send ให้เขียนคาดการณ์ ก่อนว่า นักศึกษาคิดว่า Status Code จะเป็นอะไร** แล้วจึงทดสอบจริงเพื่อเทียบกับที่คาดไว้
@@ -89,6 +93,12 @@ https://api.openweathermap.org/data/2.5/weather?q=Bangkok&appid=YOUR_API_KEY&uni
 ```text
 บันทึกรูปและคำตอบที่นี่
 ```
+
+<img width="1151" height="470" alt="image" src="https://github.com/user-attachments/assets/05c50153-0bd8-4fce-ab20-579ff97c590f" />
+
+
+
+
 ---
 
 ## ส่วนที่ 2: สร้าง Model Class และเรียก API ด้วย http Package
@@ -185,6 +195,9 @@ void main() {
 ```text
 บันทึกรูปที่นี่
 ```
+<img width="1457" height="923" alt="image" src="https://github.com/user-attachments/assets/50b112d5-c876-4f45-b9ea-8749a7c45a40" />
+
+
 ### ขั้นตอนที่ 2.3 — 🧠 คิดเอง/ออกแบบเอง
 
 สร้างไฟล์ `lib/services/weather_service.dart` แล้วเขียน `WeatherService` ต่อจากตัวอย่างโครงเริ่มต้นด้านล่างนี้  
@@ -233,8 +246,29 @@ class WeatherService {
 > ✅ **Checkpoint 2.2** บันทึกผลการตรวจสอบ `statusCode` อย่างน้อย 2 กรณี (สำเร็จ และ 404) ตามเกณฑ์ข้างต้น
 
 ```text
-บันทึกรูปและคำตอบที่นี่
+      if (response.statusCode == 200) {
+        // กรณีสำเร็จ แปลงข้อมูลด้วย Weather.fromJson
+        return Weather.fromJson(jsonDecode(response.body));
+      } else if (response.statusCode == 404) {
+        // ดักจับกรณี 404 ไม่พบเมืองที่ค้นหา
+        throw Exception('ไม่มีเมืองที่ค้นหา กรุณาตรวจสอบชื่อเมืองอีกครั้ง');
+      }
+
+      // กรณี Error อื่นๆ
+      throw Exception('เกิดข้อผิดพลาดจากเซิร์ฟเวอร์ (${response.statusCode})');
+    } on TimeoutException {
+      throw Exception('การเชื่อมต่อหมดเวลา กรุณาลองใหม่อีกครั้ง');
+    } on http.ClientException {
+      throw Exception(
+        'ไม่สามารถเชื่อมต่ออินเทอร์เน็ตได้ กรุณาตรวจสอบการเชื่อมต่อ',
+      );
+    } on FormatException {
+      // ดักจับกรณี JSON ผิดรูปแบบ
+      throw Exception('ข้อมูลที่ได้รับจากเซิร์ฟเวอร์ผิดรูปแบบ');
+    } catch (e) {
+      rethrow;
 ```
+
 
 ### ขั้นตอนที่ 2.4 — 🧠 คิดเอง/ออกแบบเอง
 
@@ -354,6 +388,16 @@ class MyApp extends StatelessWidget {
 ```text
 บันทึกรูปที่นี่
 ```
+1.ค้นหาเมืองที่มีจริง 
+  <img width="1906" height="621" alt="image" src="https://github.com/user-attachments/assets/779c77b0-5ec2-44a1-b152-701bc20ca2a7" />
+
+2. ค้นหาเมืองที่ไม่มีอยู่จริง
+<img width="1897" height="365" alt="image" src="https://github.com/user-attachments/assets/2bc142e4-4b54-40ff-a882-d6ce832c160b" />
+
+3. ปิด Wi-Fi/Data บนเครื่องแล้วลองค้นหา
+<img width="1908" height="437" alt="image" src="https://github.com/user-attachments/assets/08eccc53-98db-4c96-b7e0-b84c080d5cdf" />
+
+
 
 ---
 
